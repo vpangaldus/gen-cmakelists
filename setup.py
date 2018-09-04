@@ -8,7 +8,7 @@ setup(
     install_requires=[
         'Click',
         'Jinja2',
-		'pytest',
+        'pytest',
     ],
     include_package_data=True,
     entry_points='''
