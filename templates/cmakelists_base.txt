@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION {{ data.version | default('3.11', True) }})
+
+project({{ data.project_name }} LANGUAGES CXX)
+{% for lib in data.libs %}
+find_package({{lib}} REQUIRED)
+{% endfor %}
+add_executable({{ data.project_name }} main.cpp)
+set_target_properties({{ data.project_name }} PROPERTIES 
+    CXX_STANDARD 14
+    CXX_STANDARD_REQUIRED YES
+    CXX_EXTENSIONS NO
+)
+{% if data.libs %}
+# Note:
+# Please adjust the link dependencies, it is PUBLIC by default
+target_link_libraries({{ data.project_name }}
+  PUBLIC
+  {%- for lib in data.libs -%}
+    {%- if lib == 'Threads' %}
+    ${CMAKE_THREAD_LIBS_INIT}
+    {%- else %}
+    {{lib}}
+    {%- endif %}
+  {%- endfor %}
+)
+{% endif %}
