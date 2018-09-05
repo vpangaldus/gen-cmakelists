@@ -11,7 +11,7 @@ python setup.py install
 ```
 ## Usage
 The script will generate CMakeLists.txt for C++ project. It, by default, uses CMake 3.11 and C++14 standard.
-Currently, it only targets linux. 
+Currently, it only targets linux. User is still expected to modify and adjust all the neccessary information such as library name, path to library and so on. The script will help only on the repetitive stuffs.
 
 To get help:
 ```
