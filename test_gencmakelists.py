@@ -27,12 +27,11 @@ set_target_properties(app PROPERTIES
     CXX_STANDARD_REQUIRED YES
     CXX_EXTENSIONS NO
 )
-
 # Note:
-# Please adjust the link dependencies, it is PUBLIC by default
+# Please adjust both the link dependency and the library name to link with
 target_link_libraries(app
   PUBLIC
-    ${CMAKE_THREAD_LIBS_INIT}
+  {link_lib}
 )
 """
 
@@ -59,7 +58,6 @@ def test_generate_app_with_threads_libs():
     f.close()
     os.remove('CMakeLists.txt')
     assert result.exit_code == 0
-    #print(read_data)
     assert read_data.split() == cmakelist_app_with_threads.split()
 
 

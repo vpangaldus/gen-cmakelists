@@ -12,15 +12,9 @@ set_target_properties({{ data.project_name }} PROPERTIES
 )
 {% if data.libs %}
 # Note:
-# Please adjust the link dependencies, it is PUBLIC by default
+# Please adjust both the link dependency and the library name to link with
 target_link_libraries({{ data.project_name }}
   PUBLIC
-  {%- for lib in data.libs -%}
-    {%- if lib == 'Threads' %}
-    ${CMAKE_THREAD_LIBS_INIT}
-    {%- else %}
-    {{lib}}
-    {%- endif %}
-  {%- endfor %}
+  {link_lib}
 )
 {% endif %}
