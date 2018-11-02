@@ -3,7 +3,7 @@ A simple python script to generate simple CMakeLists.txt.
 '''
 
 import click
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, PackageLoader
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.command(context_settings=CONTEXT_SETTINGS)
@@ -23,8 +23,7 @@ def cli(project_name, cmakelists_file, libs):
     """
 
     # Jinja setup
-    file_loader = FileSystemLoader('templates')
-    env = Environment(loader=file_loader)
+    env = Environment(loader=PackageLoader('GenCMakeLists'))
 
     t = env.get_template('cmakelists_base.txt')
     data = {}
